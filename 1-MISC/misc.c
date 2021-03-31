@@ -9,18 +9,18 @@
 #include <linux/miscdevice.h>
 #include <linux/fs.h>
 
-struct file_operations misc__fops = {                          \
+struct file_operations misc__fops = {                          
         .owner   = THIS_MODULE
 };
 
-struct miscdevice misc_dev {
+struct miscdevice misc_dev = {
         .minor=MISC_DYNAMIC_MINOR,
         .name="hello-misc",
         .file_operations = &misc__fops
 
 };
 
-static int misc_int(void){
+static int misc_init(void){
     int ret = misc_register(&misc_dev);
     if(ret<0)
     {
@@ -40,6 +40,6 @@ static void misc_exit(void)
 extern int misc_register(struct miscdevice *misc);
 extern int misc_deregister(struct miscdevice *misc);
 
-module_init(misc_int);
+module_init(misc_init);
 module_exit(misc_exit);
 MODULE_LICENSE("GPL");
