@@ -16,7 +16,7 @@ struct file_operations misc__fops = {
 struct miscdevice misc_dev = {
         .minor=MISC_DYNAMIC_MINOR,
         .name="hello-misc",
-        .file_operations = &misc__fops
+        .fops = &misc__fops
 
 };
 
