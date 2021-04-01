@@ -8,16 +8,29 @@
 #include <linux/module.h>
 #include <linux/miscdevice.h>
 #include <linux/fs.h>
+#include <linux/uaccess.h>
 
 ssize_t misc_read (struct file *file, char __user *ubuf, size_t size, loff_t *loff_t)
 {
+    char kbuf[]="This is a core buffer!\n";
+    if(copy_to_user(ubuf,kbuf, strlen(kbuf)) != 0)
+    {
+        printk("copy to user error!\n")
+        return -1;
+    }
     printk("MISC devive read\n");
     return 0;
 }
 
 ssize_t misc_write (struct file *file, char __user *ubuf, size_t size, loff_t *loff_t)
 {
-    printk("MISC devive write\n");
+    char kbuf[64]={0};
+    if(copy_from_user(kbuf,ubuf,size) != 0)
+    {
+        printk("copy from user error!\n")
+        return 0;
+    }
+    printk("The core buffer is %s\n",kbuf);
     return 0;
 }
 
@@ -73,3 +86,6 @@ extern int misc_deregister(struct miscdevice *misc);
 module_init(misc_init);
 module_exit(misc_exit);
 MODULE_LICENSE("GPL");
+
+
+

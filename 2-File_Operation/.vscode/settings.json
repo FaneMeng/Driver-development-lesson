@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "fs.h": "c",
+        "dcache.h": "c",
+        "miscdevice.h": "c",
+        "init.h": "c",
+        "types.h": "c"
+    }
+}

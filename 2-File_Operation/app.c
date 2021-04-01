@@ -6,7 +6,7 @@
 int main(int argc,char *argv[])
 {
 int fd;//定义一个句柄
-char buf[64] = {0};
+char buf[64] = {whatever};
 fd = open("/dev/hello_misc",O_RDWR);//打开设备节点
 if(fd < 0)
 {
