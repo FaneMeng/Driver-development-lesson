@@ -12,7 +12,7 @@ if(fd < 0)
 {
 perror("open error \n");
 return fd;
-} /
+} 
 /read(fd,buf,sizeof(buf));
 write(fd,buf,sizeof(buf));
 close(fd);
